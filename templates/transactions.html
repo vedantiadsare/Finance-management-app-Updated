@@ -57,11 +57,16 @@
         background: linear-gradient(135deg, #007bff, #00bcd4);
         border: none;
         transition: transform 0.3s ease-in-out;
+        margin: 5px;
     }
 
     .btn-primary:hover {
         transform: scale(1.05);
     }
+    .fetching {
+    opacity: 0.6;
+    pointer-events: none;
+}
 
     /* Animations */
     @keyframes fadeIn {
@@ -181,9 +186,12 @@
     </div>
     {% endif %}
    
-    <a href="{{ url_for('suggestions') }}" class="btn btn-success mb-3 float-end">
-        💡 Get Savings Suggestions
+    <a href="{{ url_for('suggestions') }}" 
+    class="btn btn-success mb-3 float-end" 
+    id="getSuggestionsBtn">
+    💡 Get Savings Suggestions
     </a>
+
     <div class="clearfix"></div>
     
 
@@ -429,6 +437,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     filterCategories(transactionType.value);
 });
+document.getElementById('getSuggestionsBtn').addEventListener('click', function(event) {
+    this.classList.add('fetching');
+    this.innerHTML = '⏳ Fetching Suggestions...';
+});
+
 </script>
 {% endblock %}
 {% endblock %}
